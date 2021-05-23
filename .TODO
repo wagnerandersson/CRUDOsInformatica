@@ -1,0 +1,48 @@
+FACULDADE DE TECNOLOGIA SENAC PELOTAS
+
+Curso Superior de Tecnologia em Análise e Desenvolvimento de Sistemas
+Programação para Internet II – Edécio Fernando Iepsen
+
+Trabalho #2
+Criar um Web Service / API / Back-end para realizar o CRUD em 4 tabelas de um sistema projetado pelo aluno 
+(exceto revenda de veículos) – contendo:
+
+- A tabela relacionada com 2 ou 3 atributos (como em nosso exemplo a tabela de marcas). Incluir via seeds alguns 
+registros na tabela.
+
+- Criar a tabela usuarios, os métodos de CRUD para esta tabela e o middleware de login para proteger as rotas 
+principais do sistema.
+
+- A tabela principal com os atributos de identificação do item (id, nome, ...), a chave estrangeira para a tabela 
+relacionada, a chave estrangeira para a tabela usuários e os campos foto (que deve armazenar a URL de uma 
+imagem do item na web), destaque (boolean) e timestamps. Criar os métodos de inclusão, listagem, consulta e 
+alteração destes dados.
+
+- Criar a rota (e o método) “destaques” que retorne apenas a listagem (em JSON) dos itens que estão em 
+destaque.
+
+- Criar a rota (e o método) “xxx/destacar” que receba um id de um item. Caso o item já esteja em destaque retirar 
+o destaque. Caso contrário, destacar o item. Retorne uma msg indicando a realização da operação (para ids 
+válidos) ou erro (para ids inválidos)
+
+- Criar a rota (e o método) “xxx/filtro” que receba uma palavra como parâmetro e retorne a listagem (em JSON) 
+dos itens que contenham a palavra chave fornecida. Retorne um JSON com mensagem caso nenhum item tenha 
+sido encontrado. 
+
+- Criar uma nova tabela que esteja relacionada com a tabela principal. Esta nova tabela e as rotas / métodos de 
+inclusão, consulta, exclusão e listagem devem realizar alguma ação relacionada a tabela principal. Por exemplo, 
+para o sistema da revenda, poderíamos criar uma tabela para armazenar propostas para compra de um carro, ou 
+uma solicitação de reserva até uma data, agendamento de test-drive, solicitação de financiamento, ... 
+
+- Criar um método que retorne dados estatísticos (em formato JSON) sobre a tabela escolhida pelo aluno, sobre 
+os quais possa ser gerado um gráfico (ou seja, retornar uma lista a partir de um group by).
+
+- Fazer o Deploy do projeto 
+
+Obs.: Todas as tabelas devem ser criadas via Migrations
+Conceitos: 
+- Com todos os itens solicitados funcionando corretamente e completos: A
+- Com a ausência / não funcionamento de um dos itens solicitados: B
+- Com a ausência / não funcionamento de dois dos itens solicitados: C
+Data da Entrega/Apresentação: 26/05/2021
+Trabalho Individua
