@@ -8,7 +8,7 @@ const port = process.env.API_PORT
 const routes = require('./routes')
 
 app.get('/', (req, res) => {
-    res.send('Hello Woeld!')
+    res.send('Hello World!')
 });
 
 app.use(express.json());
