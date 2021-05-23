@@ -5,6 +5,9 @@ exports.up = (knex) => {
         table.string('product', 100).notNullable();
         table.string('description', 300);
         table.string('serial_number', 50).unique();
+        table.string('problem_detected', 150);
+        table.string('resolution_description');
+        table.decimal('value', 10, 2)
         // Relacionamento
         table.integer('client_id').notNullable().unsigned();
         table.foreign('client_id')
