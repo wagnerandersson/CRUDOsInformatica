@@ -16,10 +16,10 @@ module.exports = {
     },
     migrations: {
       tableName: "migrations",
-      directory: "database/migrations",
+      directory: "src/database/migrations",
     },
     seeds: {
-      directory: "./database/seeds"
+      directory: "./src/database/seeds"
     }
   },
 };
