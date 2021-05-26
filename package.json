@@ -6,8 +6,8 @@
   "scripts": {
     "test": "jest",
     "build": "sucrase ./src -d ./dist --transforms imports",
-    "dev": "nodemon src/server.js",
-    "start": "node dist/server.js"
+    "dev": "nodemon server.js",
+    "start": "node ./src/dist/server.js"
   },
   "nodemonConfig": {
     "execMap": {

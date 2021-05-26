@@ -7,7 +7,8 @@ exports.up = (knex) => {
         table.string('serial_number', 50).unique();
         table.string('problem_detected', 150);
         table.string('resolution_description');
-        table.decimal('value', 10, 2)
+        table.decimal('value', 10, 2);
+        table.boolean('active').notNullable().default(true);
         // Relacionamento
         table.integer('client_id').notNullable().unsigned();
         table.foreign('client_id')
