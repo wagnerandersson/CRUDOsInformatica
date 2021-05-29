@@ -45,6 +45,28 @@ module.exports = {
         } catch (error) {
             res.status(400).json({ msg: error.message })
         }
+    },
+
+    async update(req, res) {
+        const { cpf } = req.params
+        const { name, address, email } = req.body
+
+        try {
+            const mail = await knex("clients").where({ email })
+            if (mail.length > 0) {
+                res.status(400).json({ error: "Email já cadastrado" })
+            }
+        } catch (error) {
+            res.status(400).json({ error: error.message })
+        }
+
+        try {
+            const updateClient = await knex("clients").where({ cpf }).update({ name, address, email })
+            const updatedClient = await knex("clients").where({ cpf })
+            res.status(200).json({ ...updatedClient[0] })
+        } catch (error) {
+            res.status(400).json({error: error.message})
+        }
     }
 
 

@@ -15,6 +15,7 @@ routes.get("/products", ProductsController.index)
 routes.get("/clients", ClientController.index)
     .post("/clients", ClientController.create)
     .delete("/clients/:cpf", ClientController.delete)
+    .put("/clients/update/:cpf", ClientController.update)
 
 
 

@@ -1,3 +1,4 @@
+import { response } from 'express';
 import request from 'supertest';
 
 import app from '../../app';
@@ -17,11 +18,23 @@ beforeEach(() => {
             serial_number: "4321"
         }
     ]
-    clients = [{
+    clients = [
+        {
         name: 'Josielson Soares',
         address: 'Rua 1 N 123',
         email: 'gege1243@gmail.com',
         cpf: '111.452.352-45'
+    },
+        {
+        name: 'Josenilson dos Santos',
+        address: 'Rua 1 N 123',
+        email: 'gege124354@gmail.com',
+        cpf: '122.444.552-45'
+    },
+        {
+        name: 'Josenilson dos Santos ATUALIZADO',
+        address: 'Rua 1 N 123',
+        email: 'gege124354ATUALIZADO@gmail.com'        
     }
     ]
 });
@@ -31,14 +44,29 @@ test('Deve ser possível adicionar um novo cliente', async () => {
         .post('/clients')
         .send(clients[0])
 
+        await request(app).delete('/clients/111.452.352-45')        
     expect(response.body).toBe("Cadastro realizado com sucesso!")
 });
 
 test('deve ser possível deletar um cliente', async () => {
-    const response = await request(app)
-        .delete('/clients/111.452.352-45')
+    await request(app).post('/clients').send(clients[1])
 
-    expect(response.body).toMatchObject({ ...clients[0] })
+    const response = await request(app)
+        .delete('/clients/122.444.552-45')
+
+    expect(response.body).toMatchObject({ ...clients[1] })
+})
+
+test('deve ser possível alterar um cliente', async () => {
+    await request(app).post('/clients').send(clients[1])
+
+    const response = await request(app)
+    .put('/clients/update/122.444.552-45')
+    .send(clients[2])
+
+    await request(app).delete('/clients/122.444.552-45')
+
+    expect(response.body).toMatchObject({ ...clients[2]})
 })
 
 
