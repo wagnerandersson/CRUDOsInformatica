@@ -4,7 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "jest",
+    "test": "jest --coverage --verbose",
     "build": "sucrase ./src -d ./dist --transforms imports",
     "dev": "nodemon server.js",
     "start": "node ./src/dist/server.js"
