@@ -11,4 +11,4 @@ app.get("/", (req, res) => {
 app.use(express.json());
 app.use(routes);
 
-export default app;
+module.exports = app;
