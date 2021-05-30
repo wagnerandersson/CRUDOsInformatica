@@ -3,7 +3,8 @@ import request from 'supertest';
 
 import app from '../../app';
 
-let products, clients;
+let products, clients, id
+
 
 beforeEach(() => {
     products = [
@@ -15,7 +16,8 @@ beforeEach(() => {
         {
             product: "Positivo 1",
             description: "Não liga",
-            serial_number: "4321"
+            serial_number: "4321",
+            client_id: id
         }
     ]
     clients = [
@@ -70,13 +72,31 @@ test('deve ser possível alterar um cliente', async () => {
 })
 
 
+test('Deve ser possível adicionar um novo produto em OS', async () => {
+    const client = await request(app).post('/clients').send(clients[1])
 
-// test('Deve ser possível adicionar um novo produto em OS', async () => {
-//     const response = await request(app)
-//         .post('/products')
-//         .send(products[0]);
+    id = client.id
 
-//     expect(response.body).toMatchObject({
-//         ...products[0]
-//     });
-// })
+    const response = await request(app)
+        .post('/products')
+        .send(products[0]);
+        
+    expect(response.body).toBe("Os Cadastrada!");
+
+    await request(app).delete('/clients/122.444.552-45')
+    await request(app).delete(`/products/${response.id}`)
+})
+
+
+test('deve ser possível deletar OS', async () => {
+    const client = await request(app).post('/clients').send(clients[1])
+
+    id = client.id
+    const productOs = await request(app).post('/products').send(products[0]);
+    
+    const response = await request(app).delete(`/products/${productOs.id}`)
+
+    expect(response.body).toMatchObject({ ...products[0] })
+
+
+})
