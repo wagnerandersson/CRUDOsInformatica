@@ -3,7 +3,7 @@ require("dotenv").config();
 const knex = require("knex")({
   client: "pg",
   connection: {
-    host: process.env.DB_HOST,
+    host: "ec2-174-129-225-160.compute-1.amazonaws.com",
     port: process.env.DB_PORT,
     user: process.env.DB_USER,
     password: process.env.DB_PASS,
