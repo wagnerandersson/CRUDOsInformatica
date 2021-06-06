@@ -30,7 +30,6 @@ module.exports = {
         email,
         cpf,
       });
-      console.log(newClient);
       res.status(201).json("Cadastro realizado com sucesso!");
     } catch (error) {
       res.status(400).json({ error: error.message });

@@ -10,12 +10,12 @@ beforeEach(() => {
     {
       product: "Macbook pro",
       description: "Travando",
-      serial_number: "1234556",
+      serial_number: "123123231234556",
     },
     {
       product: "Positivo 1",
       description: "Não liga",
-      serial_number: "4321",
+      serial_number: "4333123123321",
       client_id: id,
     },
   ];
@@ -67,26 +67,14 @@ test("deve ser possível alterar um cliente", async () => {
   expect(response.body).toMatchObject({ ...clients[2] });
 });
 
-test("Deve ser possível adicionar um novo produto em OS", async () => {
-  const client = await request(app).post("/clients").send(clients[1]);
+test("deve ser possível listar todos os clientes", async () => {
+  await request(app).post("/clients").send(clients[0]);
+  await request(app).post("/clients").send(clients[1]);
 
-  id = client.id;
+  const response = await request(app).get("/clients");
 
-  const response = await request(app).post("/products").send(products[0]);
+  expect(response.body).toMatchObject([{ ...clients[0] }, { ...clients[1] }]);
 
-  expect(response.body).toBe("Os Cadastrada!");
-
+  await request(app).delete("/clients/111.452.352-45");
   await request(app).delete("/clients/122.444.552-45");
-  await request(app).delete(`/products/${response.id}`);
-});
-
-test("deve ser possível deletar OS", async () => {
-  const client = await request(app).post("/clients").send(clients[1]);
-
-  id = client.id;
-  const productOs = await request(app).post("/products").send(products[0]);
-
-  const response = await request(app).delete(`/products/${productOs.id}`);
-
-  expect(response.body).toMatchObject({ ...products[0] });
 });
