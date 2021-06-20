@@ -17,7 +17,7 @@ module.exports = {
     try {
       const mail = await knex("clients").where({ email });
       if (mail.length > 0) {
-        res.status(400).json({ error: "Email já cadastrado" });
+        res.status(400).json("Email já cadastrado");
       }
     } catch (error) {
       res.status(400).json({ error: error.message });

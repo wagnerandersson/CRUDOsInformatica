@@ -37,6 +37,20 @@ beforeEach(() => {
       address: "Rua 1 N 123",
       email: "gege124354ATUALIZADO@gmail.com",
     },
+    {
+      address: "Rua 1 N 123",
+      email: "gege1243@gmail.com",
+      cpf: "111.452.352-45",
+    },
+    {
+      name: "Soares Soares",
+      address: "Rua 1 N 123",
+      email: "gege1243@gmail.com",
+      cpf: "135.452.356-44",
+    },
+    {
+      email: "gege124354@gmail.com",
+    },
   ];
 });
 
@@ -78,3 +92,36 @@ test("deve ser possível listar todos os clientes", async () => {
   await request(app).delete("/clients/111.452.352-45");
   await request(app).delete("/clients/122.444.552-45");
 });
+
+test("Não pode ser possível alterar um email para um já cadastrado", async () => {
+  await request(app).post("/clients").send(clients[1]);
+
+  const response = await request(app)
+    .put("/clients/update/122.444.552-45")
+    .send(clients[5]);
+
+  expect(response.status).toBe(400);
+  await request(app).delete("/clients/122.444.552-45");
+});
+
+test("Não deve ser possível adicionar um novo cliente sem nome", async () => {
+  const response = await request(app).post("/clients").send(clients[3]);
+
+  expect(response.status).toBe(400);
+});
+
+test("ao tentar deletar um cpf inexistente deve retornar erro", async () => {
+  await request(app).post("/clients").send(clients[1]);
+
+  const response = await request(app).delete("/clients/122.444.52-45");
+
+  expect(response.body).toBe();
+});
+
+// test("Não deve ser possível adicionar um novo cliente se o email já existir", async () => {
+//   await request(app).post("/clients").send(clients[0]);
+//   const response = await request(app).post("/clients").send(clients[4]);
+
+//   expect(response.body).toBe("Email já cadastrado");
+//   await request(app).delete("/clients/111.452.352-45");
+// });

@@ -1,6 +1,8 @@
 require("dotenv").config();
+var cors = require("cors");
 
 const app = require("./app");
+app.use(cors());
 
 const apiport = 3000;
 
